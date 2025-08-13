@@ -1,0 +1,14 @@
+#puthon stuff
+__pycache__/
+.pylintrc
+
+# IDE stuff
+.vscode/
+.env
+
+# Django stuff
+db.sqlite3
+media/
+
+# Cache
+cache/
