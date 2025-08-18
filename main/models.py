@@ -36,7 +36,7 @@ class Size(models.Model):
         return self.name
     
 class ProductSize(models.Model):
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='product_size')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='product_sizes')
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
     stock = models.PositiveIntegerField(default=0)
 
@@ -51,7 +51,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     color = models.CharField(max_length=30)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    main_image = models.ImageField(upload_to='product/main')# лицевое фото товара
+    main_image = models.ImageField(upload_to='product/main/')# лицевое фото товара
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -65,5 +65,5 @@ class Product(models.Model):
     
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
-    images = models.ImageField(upload_to='product/extra_photo')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product/extra_photo/')

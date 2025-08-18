@@ -14,14 +14,14 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['current_category'] = None # Здесь можно установить текущую категорию, если нужно
+        context['current_category'] = '' # Здесь можно установить текущую категорию, если нужно
         return context
     
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         # проверяем какой был запрос, если это запрос с другой страницы,
         # то будет подгрузка лишь блока, а если будет обычный запрос, то отрисуем всю страницу
-        if request.GET.get('HX-Request'):
+        if request.headers.get('HX-Request'):
             return TemplateResponse(request, 'main/home_content.html', context)
         return TemplateResponse(request, self.template_name, context)
     
@@ -38,10 +38,10 @@ class CategoryView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category_slug = kwargs.get('slug')
+        category_slug = kwargs.get('category_slug')
         categories = Category.objects.all()
         products = Product.objects.all().order_by('-created_at')
-        current_category = None
+        current_category = ''
         if category_slug:
             current_category = get_object_or_404(Category, slug=category_slug)
             # фильтруем категорию по которой сделал человек запрос
@@ -80,7 +80,7 @@ class CategoryView(TemplateView):
         return context
     
     def get(self, request, *args, **kwargs):
-        context = super().get(request, *args, **kwargs)
+        context = self.get_context_data(**kwargs)
         if request.headers.get('HX-Request'):
             if context.get('show_search'):
                 return TemplateResponse(request, 'main/search_input.html', context)
@@ -109,8 +109,8 @@ class ProductDetailView(DetailView):
         return context
     
     def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
         self.object = self.get_object()
+        context = self.get_context_data(**kwargs)
         if request.headers.get('HX-Request'):
             return TemplateResponse(request, 'main/product_detail.html', context)
-        raise TemplateResponse(request, self.template_name, context)
+        return TemplateResponse(request, self.template_name, context)
