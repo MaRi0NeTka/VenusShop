@@ -1,6 +1,16 @@
 from django.db import models
 from django.utils.text import slugify
+''' 
+Category - расписываем категорию товара, чтобы понимать, к какой группе он принадлежит
 
+Size - описываем размер товара, используя отдельную модель(для каждого размера)
+
+ProductSize - связываем товар с его размерами и количеством на складе
+
+Product - описываем товар, его характеристики, которые будут отображаться на сайте
+
+ProductImage - описываем дополнительные изображения товара, которые будут отображаться на сайте при заходе на страницу товара
+'''
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -9,10 +19,14 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
 
 class Size(models.Model):
@@ -44,7 +58,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
