@@ -101,7 +101,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
-        context['category'] = Category.objects.all()
+        context['categories'] = Category.objects.all()
         context['related_products'] = Product.objects.filter(
             category=product.category
         ).exclude(id=product.id)[:4]  # Показываем 4 похожих товара
