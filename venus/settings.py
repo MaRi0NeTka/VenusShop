@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'main',
     'cart',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 1 week
 SESSION_SAVE_EVERY_REQUEST = True #сохранять куки сессии при каждом запросе
 
+
+AUTH_USER_MODEL = 'user.CustomUser'  # Указываем на нашу кастомную модель пользователя
