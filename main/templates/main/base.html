@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}1st venus{% endblock %}</title>
+    <title>{% block title %}1st Venus{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -116,10 +116,9 @@
     <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-80 h-full bg-white z-50 md:hidden shadow-lg">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
-                <h2 class="text-lg font-bold tracking-tight">
-                    ENFANTS RICHES <br>
-                    DÉPRIMÉS
-                </h2>   
+                <h2 class="text-lg font-bold tracking-tight text-left">
+                    1st Venus
+                </h2>
                 <button id="closeMenu" class="hamburger active">
                     <span></span>
                     <span></span>
@@ -148,7 +147,10 @@
             
             <div class="mt-8 space-y-4">
                 <a href="#" class="block text-sm font-medium text-gray-900 hover:text-gray-700 py-2">SEARCH</a>
-                <a href="#" 
+                <a href="{% url 'user:profile' %}" 
+                hx-get="{% url 'user:profile' %}" 
+                hx-target="#main-content" 
+                hx-push-url="true"
                 class="text-sm font-medium text-gray-900 uppercase hover:text-gray-600">
                     ACCOUNT
                 </a>
@@ -174,9 +176,8 @@
                        hx-get="{% url 'main:index' %}" 
                        hx-target="#main-content" 
                        hx-push-url="true">
-                        <h1 class="text-sm sm:text-lg font-bold tracking-tight text-center">
-                            1st<br>
-                            Venus
+                        <h1 class="text-sm sm:text-lg font-bold tracking-tight text-left">
+                            1st Venus
                         </h1>
                     </a>
                 </div>
@@ -205,7 +206,10 @@
                             SEARCH
                         </button>
                     </div>
-                    <a href="№" 
+                    <a href="{% url 'user:profile' %}" 
+                    hx-get="{% url 'user:profile' %}" 
+                    hx-target="#main-content" 
+                    hx-push-url="true"
                     class="text-sm font-medium text-gray-900 uppercase hover:text-gray-600">
                         ACCOUNT
                     </a>

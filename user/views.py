@@ -18,9 +18,9 @@ def register(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, 'Registration successful.')
             return redirect('main:index')
-        else:
-            form = CustomUserCreationForm()
-        return render(request, 'user/register.html', {'form': form})
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'user/register.html', {'form': form})
     
 
 def login_view(request):
@@ -30,9 +30,9 @@ def login_view(request):
             user = form.get_user()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('main:index')
-        else:
-            form = CustomUserLoginForm()
-        return render(request, 'user/login.html', {'form': form})
+    else:
+        form = CustomUserLoginForm()
+    return render(request, 'user/login.html', {'form': form})
     
 
 @login_required(login_url='/user/login/')
@@ -61,7 +61,7 @@ def account_details(request):
 @login_required(login_url='/user/login/')
 def edit_account_details(request):
     form = CustomUserUpdateForm(instance=request.user)
-    return TemplateResponse(request, 'user/partials/account_details.html', {'user': request.user, 'form': form})
+    return TemplateResponse(request, 'user/partials/edit_account_details.html', {'user': request.user, 'form': form})
 
 @login_required(login_url='/user/login/')
 def update_account_details(request):
