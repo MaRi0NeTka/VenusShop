@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'main',
     'cart',
     'user',
+    'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,7 @@ SESSION_SAVE_EVERY_REQUEST = True #сохранять куки сессии пр
 
 
 AUTH_USER_MODEL = 'user.CustomUser'  # Указываем на нашу кастомную модель пользователя
+
+
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
