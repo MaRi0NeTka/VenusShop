@@ -26,7 +26,7 @@ def create_stripe_checkout_session(order, request):
             'price_data': {
                 'currency': 'usd',
                 'product_data': {
-                    'name': f'{item.product.name} - {item.product.product_size.size.name}'
+                    'name': f'{item.product.name} - {item.product_size.size.name}',
                 },
                 'unit_amount': int(Decimal(item.product.price) * 100)
             },
@@ -95,7 +95,7 @@ def stripe_payment_success(request):
             context = {'order': order}
             if request.headers.get('HX-Request')=='true':
                 return TemplateResponse(request, 'payment/stripe_success.html', context)
-            return render(request, 'payment/success.html', context)
+            return render(request, 'payment/stripe_success.html', context)
         except Exception as e:
             raise
     return redirect('main:index')
@@ -109,6 +109,6 @@ def stripe_payment_cancel(request):
         context = {'order': order}
         if request.headers.get('HX-Request')=='true':
             return TemplateResponse(request, 'payment/stripe_cancel.html', context)
-        return render(request, 'payment/cancel.html', context)
+        return render(request, 'payment/stripe_cancel.html', context)
     return redirect('orders:checkout')
     

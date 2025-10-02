@@ -10,10 +10,11 @@ class AddToCartForm(forms.Form):
     def __init__(self, *args, product=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.product = product
+
         if product:
             sizes = product.product_sizes.filter(stock__gt=0)
             if sizes.exists():
-                print([(ps.id, ps.size.name) for ps in sizes])
+                print(product, [(ps.id, ps.size.name) for ps in sizes])
                 self.fields['size_id'] = forms.ChoiceField(
                     choices=[(ps.id, ps.size.name) for ps in sizes],
                              required=True,

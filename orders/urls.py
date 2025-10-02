@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import CheckOutView
+from .views import CheckoutView
 
 app_name = 'orders'
 urlpatterns = [
-    path('checkout/', CheckOutView.as_view(), name='checkout')
+    path('checkout/', CheckoutView.as_view(), name='checkout')
 ]

@@ -19,7 +19,7 @@ class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    email = models.EmailField(unique=True, max_length=250)
+    email = models.EmailField(max_length=250)
     company = models.CharField(max_length=80, blank=True, null=True)
     address1 = models.CharField(max_length=250, blank=True, null=True)
     address2 = models.CharField(max_length=250, blank=True, null=True)
